@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>
+            new practice
+        </title>
+         
+         <style>
+             .error
+            {
+                color: red;
+            }
+            
+            button
+            {
+                background-color: black;
+                color: white;
+                padding: 10px;
+                margin-left: 50px;
+            }
+            
+              form
+            {
+                
+               text-align:center;
+               margin-left: 600px;
+               border: 3px solid black; width: 25%;
+               margin-top: 150px;
+               background-color:rgb(200, 204, 208);
+               /* margin-left: 50%; */
+            }
+            button.hover
+            {
+                background-color: yellow;
+            }
+         </style>
+        
+    </head> 
+    <body>
+        
+                 <form>
+                    <h1> Student registeration </h1>
+                    <label>Name:</label>
+                    <br>
+                    <input type = "text" minlength = "5" maxlength = "50" required>
+                    <div class = "error">please enter text in 5 to 50 words</div>
+                    <br>
+
+                    <label>E-mail:</label>
+                    <br>
+                    <input type = "email" required>
+                    <div class = "error"> Must be valid email id</div>
+                    <br>
+                    <label>Age:</label>
+                    <br>
+                    <input type = "number" min = 16 max = 30 required>
+                    <div class = "error"> between 16 to 30 only</div>
+                    <br>
+                    <button type = "submit"> register</button>
+
+                </form> 
+    </body>
+    </html> 

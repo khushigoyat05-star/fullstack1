@@ -1,0 +1,113 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Bank App</title>
+
+    <style>
+        body {
+            
+            background-color:azure;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+            border-radius: 10px;
+           
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 130px;
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            /* cursor: pointer; */
+            margin: 5px;
+        }
+
+        .deposit {
+            background: #2563eb;
+        }
+
+        .withdraw {
+            background: #ef4444;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Balance: $<span id="balance">1000</span></h1>
+
+    <input type="number" id="amount" placeholder="Amount">
+
+    <br>
+
+    <button class="deposit" onclick="deposit()">Deposit</button>
+    <button class="withdraw" onclick="withdraw()">Withdraw</button>
+
+    <div class="error" id="error"></div>
+</div>
+
+<script>
+    let balance = 1000;
+
+    function deposit() {
+        let amt = Number(document.getElementById("amount").value);
+        let error = document.getElementById("error");
+
+        if (amt <= 0) {
+            error.innerText = "Invalid amount!";
+            return;
+        }
+
+        balance += amt;
+        document.getElementById("balance").innerText = balance;
+        error.innerText = "";
+        document.getElementById("amount").value = "";
+    }
+
+    function withdraw() {
+        let amt = Number(document.getElementById("amount").value);
+        let error = document.getElementById("error");
+
+        if (amt <= 0 || amt > balance) {
+            error.innerText = "Invalid amount!";
+            return;
+        }
+
+        balance -= amt;
+        document.getElementById("balance").innerText = balance;
+        error.innerText = "";
+        document.getElementById("amount").value = "";
+    }
+</script>
+
+</body>
+</html>  

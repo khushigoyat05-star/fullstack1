@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Draw Circles</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+    }
+
+    .box {
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        
+        width: 450px;
+        text-align: center;
+    }
+
+    .top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        background: #2979ff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    canvas {
+        border: 2px dashed #ddd;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+    .count {
+        margin-top: 15px;
+        font-size: 18px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <div class="top">
+        <button onclick="undo()">Undo</button>
+    </div>
+
+    <canvas id="canvas" width="400" height="300"></canvas>
+
+    <div class="count">
+        Circles drawn: <span id="count">0</span>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const countText = document.getElementById("count");
+
+    let circles = [];
+
+    canvas.addEventListener("click", function(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        circles.push({x, y});
+        draw();
+    });
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        circles.forEach(c => {
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, 6, 0, Math.PI * 2);
+            ctx.fillStyle = "#2979ff";
+            ctx.fill();
+        });
+
+        countText.innerText = circles.length;
+    }
+
+    function undo() {
+        circles.pop();
+        draw();
+    }
+</script>
+
+</body>
+</html>

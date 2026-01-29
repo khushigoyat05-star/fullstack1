@@ -1,0 +1,248 @@
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table Generator</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Dynamic Table Generator</h2>
+
+Name: <input type="text" id="name">
+Age: <input type="number" id="age">
+Course: <input type="text" id="course">
+<button onclick="addRow()">Add</button>
+
+<table id="table">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Course</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+<script>
+    function addRow() {
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        let course = document.getElementById("course").value;
+
+        let table = document.getElementById("table");
+        let row = table.insertRow();
+
+        row.insertCell(0).innerText = name;
+        row.insertCell(1).innerText = age;
+        row.insertCell(2).innerText = course;
+
+        let actionCell = row.insertCell(3);
+        let btn = document.createElement("button");
+        btn.innerText = "Delete";
+        btn.onclick = function () {
+            row.remove();
+        };
+        actionCell.appendChild(btn);
+    }
+</script>
+
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+
+        /* -------- TASK 1 : IMAGE GALLERY -------- */
+        .gallery {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .gallery img {
+            width: 100px;
+            height: 70px;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .gallery img.active {
+            border: 3px solid blue;
+        }
+
+        .preview {
+            width: 400px;
+            height: 250px;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* -------- TASK 2 : TABLE -------- */
+        input {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 70%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= TASK 1 ================= -->
+    <h2>Task 1: Image Gallery with Click Preview</h2>
+
+    <div class="gallery">
+        <img src="https://picsum.photos/id/1015/400/250" onclick="showImage(this)">
+        <img src="https://picsum.photos/id/1016/400/250" onclick="showImage(this)">
+        <img src="https://picsum.photos/id/1018/400/250" onclick="showImage(this)">
+        <img src="https://picsum.photos/id/1020/400/250" onclick="showImage(this)">
+    </div>
+
+    <div class="preview">
+        <img id="previewImage" src="https://picsum.photos/id/1015/400/250">
+    </div>
+
+    <!-- ================= TASK 2 ================= -->
+    <h2>Task 2: Dynamic Table Generator</h2>
+
+    <input type="text" id="name" placeholder="Name">
+    <input type="number" id="age" placeholder="Age">
+    <input type="text" id="course" placeholder="Course">
+    <button onclick="addRow()">Add</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Course</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        /* -------- TASK 1 SCRIPT -------- */
+        function showImage(img) {
+            document.getElementById("previewImage").src = img.src;
+
+            let thumbnails = document.querySelectorAll(".gallery img");
+            thumbnails.forEach(thumbnail => {
+                thumbnail.classList.remove("active");
+            });
+
+            img.classList.add("active");
+        }
+
+        /* -------- TASK 2 SCRIPT -------- */
+        function addRow() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let course = document.getElementById("course").value;
+
+            if (name === "" || age === "" || course === "") {
+                alert("Please fill all fields");
+                return;
+            }
+
+            let tableBody = document.getElementById("tableBody");
+            let row = tableBody.insertRow();
+
+            row.insertCell(0).innerText = name;
+            row.insertCell(1).innerText = age;
+            row.insertCell(2).innerText = course;
+
+            let deleteCell = row.insertCell(3);
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Delete";
+            deleteBtn.onclick = function () {
+                tableBody.removeChild(row);
+            };
+            deleteCell.appendChild(deleteBtn);
+
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("course").value = "";
+        }
+    </script>
+
+</body>
+</html>
